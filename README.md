@@ -8,9 +8,9 @@
 
 页面预览：
 
-![表格](https://github.com/dongnanyanhai/vue-web-loader-2-admin/blob/master/img/table.png)
-![表单](https://github.com/dongnanyanhai/vue-web-loader-2-admin/blob/master/img/form.png)
-![统计](https://github.com/dongnanyanhai/vue-web-loader-2-admin/blob/master/img/card.png)
+![表格](https://raw.githubusercontent.com/dongnanyanhai/vue-web-loader-2-admin/main/img/table.png)
+![表单](https://raw.githubusercontent.com/dongnanyanhai/vue-web-loader-2-admin/main/img/form.png)
+![统计](https://raw.githubusercontent.com/dongnanyanhai/vue-web-loader-2-admin/main/img/card.png)
 
 文档说明：
 
