@@ -34,7 +34,7 @@
 
 ```
     location ~ (.*\.json) {
-        root d:/wwwroot/projects.h5pro.cn;
+        root d:/wwwroot/xxx.xxx.xxx;
         error_page 405 =200 $1;
     }
 ```
