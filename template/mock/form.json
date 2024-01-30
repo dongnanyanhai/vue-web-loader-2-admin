@@ -66,16 +66,7 @@
     {
         "type": "input-number",
         "label": "测试数字框",
-        "name": "test_input_number",
-        "max": null,
-        "min": null,
-        "step": 1,
-        "stepStrictly": false,
-        "size": "",
-        "disabled": false,
-        "controls": true,
-        "controlsPosition": "",
-        "placeholder": ""
+        "name": "test_input_number"
     },
     {
         "type": "select",

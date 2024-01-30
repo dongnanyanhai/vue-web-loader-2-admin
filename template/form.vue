@@ -9,7 +9,7 @@
                     <el-checkbox v-for="(option,idx2) in item.options" :key="idx2" :label="option.label" :disabled="check(option.disabled,false)" :border="check(option.border,false)">{{check(option.title,option.label)}}</el-checkbox>
                 </el-checkbox-group>
                 <el-input v-if="item.type == 'input' || item.type == 'textarea'" v-model="formData[item.name]" :type="item.type" :maxlength="check(item.maxlength,-1)" :minlength="check(item.minlength,-1)" :show-word-limit="check(item.showWordLimit,false)" :placeholder="check(item.placeholder,'')" :clearable="check(item.clearable,false)" :show-password="check(item.showPassword,false)" :disabled="check(item.disabled,false)" :prefix-icon="check(item.prefixIcon,'')" :suffix-icon="check(item.suffixIcon,'')" :rows="check(item.rows,2)" :autosize="check(item.autosize,false)" :autocomplete="check(item.autocomplete,'off')" :readonly="check(item.readonly,false)" :max="check(item.max,'')" :min="check(item.min,'')" :step="check(item.step,'')" :resize="check(item.resize,'')" :autofocus="check(item.autofocus,false)" :tabindex="check(item.tabindex,'')" :validate-event="check(item.validateEvent,true)"></el-input>
-                <el-input-number v-if="item.type == 'input-number'" v-model="formData[item.name]" :max="check(item.max,Infinity)" :min="check(item.min,-Infinity)" :step="check(item.step,1)" :step-strictly="check(item.stepStrictly,false)" :precision="check(item.precision,undefined)" :disabled="check(item.disabled,false)" :controls="check(item.controls,true)" :controls-position="check(item.controlsPosition,'')" :placeholder="check(item.placeholder,'')"></el-input-number>
+                <el-input-number v-if="item.type == 'input-number'" v-model="formData[item.name]" :max="check(item.max,Infinity)" :min="check(item.min,-Infinity)" :step="check(item.step,1)" :step-strictly="check(item.stepStrictly,false)" :precision="check(item.precision,0)" :disabled="check(item.disabled,false)" :controls="check(item.controls,true)" :controls-position="check(item.controlsPosition,'')" :placeholder="check(item.placeholder,'')" @change="inputNumberOnChange($event)"></el-input-number>
                 <el-select v-if="item.type == 'select'" v-model="formData[item.name]" :multiple="check(item.multiple,false)" :disabled="check(item.disabled,false)" :value-key="check(item.valueKey,'')" :clearable="check(item.clearable,false)" :collapse-tags="check(item.collapseTags,false)" :multiple-limit="check(item.multipleLimit,0)" :autocomplete="check(item.autocomplete,'off')" :placeholder="check(item.placeholder,'')" :filterable="check(item.filterable,false)" :allow-create="check(item.allowCreate,false)" :no-match-text="check(item.noMatchText,'无匹配数据')" :no-data-text="check(item.noDataText,'无数据')" :popper-class="check(item.popperClass,'')" :reserve-keyword="check(item.reserveKeyword,false)" :default-first-option="check(item.defaultFirstOption,false)" :popper-append-to-body="check(item.popperAppendToBody,true)" :automatic-dropdown="check(item.automaticDropdown,false)">
                     <el-option-group v-if="item.options && item.options[0] && item.options[0].options" v-for="(group,idx2) in item.options" :key="idx2" :label="group.label" :disabled="check(group.disabled,false)">
                         <el-option v-for="(option,idx3) in group.options" :key="idx3" :label="option.label" :value="option.value" :disabled="check(option.disabled,false)"></el-option>
@@ -59,8 +59,7 @@ export default {
             return data;
         }
     },
-    mounted: function() {
-    },
+    mounted: function() {},
     data: function() {
         return {}
     },
@@ -68,10 +67,13 @@ export default {
         check: function(value, defaultValue) {
             return value !== undefined ? value : defaultValue;
         },
+        inputNumberOnChange: function() {
+            this.$forceUpdate();
+        },
         submitOnClick: function() {
             var that = this;
 
-            if(!this.$route.meta['api'] || !this.$route.meta['api']['form']){
+            if (!this.$route.meta['api'] || !this.$route.meta['api']['form']) {
                 this.$funs.errorMsg('当前菜单未提供获取表单配置数据接口');
                 return;
             }
